@@ -39,13 +39,16 @@ function Nav() {
     const handleCategory = (category)=>{
        setCate(category)
        if(category=="trending"){
-        setNewListData(listingData)
+        // Sort all listings by ratings in descending order
+        const sortedListings = [...listingData].sort((a, b) => b.ratings - a.ratings);
+        setNewListData(sortedListings);
        }
        else{
-       setNewListData(listingData.filter((list)=>list.category==category))}
-
-       
-
+        // Filter by category and then sort by ratings
+        const filteredListings = listingData.filter((list) => list.category == category);
+        const sortedFilteredListings = filteredListings.sort((a, b) => b.ratings - a.ratings);
+        setNewListData(sortedFilteredListings);
+       }
     }
     const handleClick = (id) => {
         if (userData) {
@@ -65,7 +68,7 @@ function Nav() {
             <div className='w-[100vw] min-h-[80px]  border-b-[1px] border-[#dcdcdc] px-[20px] flex items-center justify-between md:px-[40px] '>
                 <div><img src={logo} alt="" className='w-[130px]' /></div>
 
-                <div className='w-[35%] relative hidden md:block '>
+                <div className='w-[35%] relative hidden md:block md:ml-[100px]'>
                     <input type="text" className='w-[100%] px-[30px] py-[10px] border-[2px] border-[#bdbaba] outline-none overflow-auto rounded-[30px] text-[17px]' placeholder='Any Where  |  Any Location  |  Any City 'onChange={(e)=>setInput(e.target.value)} value={input}/>
                     <button className='absolute p-[10px] rounded-[50px] bg-[purple] right-[3%] top-[5px]'><FiSearch className='w-[20px] h-[20px] text-[white]' /></button>
                 </div>
@@ -126,52 +129,22 @@ function Nav() {
                 <div className={`flex items-center justify-center flex-col hover:border-b-[1px] border-[#a6a5a5] text-[13px] ${cate=="villa"?"border-b-[1px] border-[#a6a5a5]":""}`} onClick={()=>handleCategory("villa")}>
                     <GiFamilyHouse className='w-[30px] h-[30px] text-black' />
                     <h3>Villa</h3>
-
                 </div>
 
                 <div className={`flex items-center justify-center flex-col hover:border-b-[1px] border-[#a6a5a5] text-[13px] ${cate=="farmHouse"?"border-b-[1px] border-[#a6a5a5]":""}`} onClick={()=>handleCategory("farmHouse")}>
                     <FaTreeCity className='w-[30px] h-[30px] text-black' />
                     <h3>Farm House</h3>
-
                 </div>
 
                 <div className={`flex items-center justify-center flex-col hover:border-b-[1px] border-[#a6a5a5] text-[13px] ${cate=="poolHouse"?"border-b-[1px] border-[#a6a5a5]":""}`} onClick={()=>handleCategory("poolHouse")}>
                     <MdOutlinePool className='w-[30px] h-[30px] text-black' />
                     <h3>Pool House</h3>
-
                 </div>
 
                 <div className={`flex items-center justify-center flex-col hover:border-b-[1px] border-[#a6a5a5] text-[13px] ${cate=="rooms"?"border-b-[1px] border-[#a6a5a5]":""}`} onClick={()=>handleCategory("rooms")}>
                     <MdBedroomParent className='w-[30px] h-[30px] text-black' />
                     <h3>Rooms</h3>
-
                 </div>
-
-                <div className={`flex items-center justify-center flex-col hover:border-b-[1px] border-[#a6a5a5] text-[13px] ${cate=="flat"?"border-b-[1px] border-[#a6a5a5]":""}`} onClick={()=>handleCategory("flat")}>
-                    <BiBuildingHouse className='w-[30px] h-[30px] text-black' />
-                    <h3>Flat</h3>
-
-                </div>
-
-                <div className={`flex items-center justify-center flex-col hover:border-b-[1px] border-[#a6a5a5] text-[13px] ${cate=="pg"?"border-b-[1px] border-[#a6a5a5]":""}`} onClick={()=>handleCategory("pg")}>
-                    <IoBedOutline className='w-[30px] h-[30px] text-black' />
-                    <h3>PG</h3>
-
-                </div>
-
-                <div className={`flex items-center justify-center flex-col hover:border-b-[1px] border-[#a6a5a5] text-[13px] ${cate=="cabin"?"border-b-[1px] border-[#a6a5a5]":""}`} onClick={()=>handleCategory("cabin")}>
-                    <GiWoodCabin className='w-[30px] h-[30px] text-black' />
-                    <h3>Cabins</h3>
-
-                </div>
-
-                <div className={`flex items-center justify-center flex-col hover:border-b-[1px] border-[#a6a5a5] text-[13px] ${cate=="shops"?"border-b-[1px] border-[#a6a5a5]":""}`} onClick={()=>handleCategory("shops")}>
-                    <SiHomeassistantcommunitystore className='w-[30px] h-[30px] text-black' />
-                    <h3>Shops</h3>
-
-                </div>
-
-
             </div>
         </div>
     )

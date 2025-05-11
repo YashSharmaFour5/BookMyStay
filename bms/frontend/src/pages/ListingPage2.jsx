@@ -25,45 +25,30 @@ function ListingPage2() {
         <div className='w-[200px] h-[50px] text-[20px] bg-[purple] text-[white] flex items-center justify-center rounded-[30px] absolute top-[5%] right-[10px] shadow-lg'> Set Your Category </div>
 
         <div className='max-w-[900px] w-[100%] h-[550px] overflow-auto bg-white flex items-center justify-start flex-col gap-[40px] mt-[30px] '>
-        <h1 className='text-[18px] text-[black] md:text-[30px] px-[10px] '>Which of these best describes your place?</h1>
+        <h1 className='text-[18px] text-[black] md:text-[30px] px-[10px] text-center'>Which of these best describes your place?</h1>
         
-        <div className='max-w-[900px] w-[100%] h-[100%] flex flex-wrap items-center justify-center gap-[15px] md:w-[70%]'>
-
-            <div className={`w-[180px] h-[100px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg ${category == "villa" ?"border-3 border-[#8b8b8b]" : ""}`} onClick={()=>setCategory("villa")}>
-            <GiFamilyHouse className='w-[30px] h-[30px] text-[black]' /><h3>Villa</h3>
+        <div className='max-w-[800px] w-[100%] grid grid-cols-2 md:grid-cols-4 gap-6 px-[20px] place-items-center'>
+            <div className={`w-[200px] h-[120px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg transition-all duration-300 ${category == "villa" ?"border-3 border-[#8b8b8b] shadow-lg" : ""}`} onClick={()=>setCategory("villa")}>
+                <GiFamilyHouse className='w-[35px] h-[35px] text-[black] mb-2' />
+                <h3 className='font-medium'>Villa</h3>
             </div>
 
-            <div className={`w-[180px] h-[100px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg ${category == "farmHouse" ?"border-3 border-[#8b8b8b]" : ""}`} onClick={()=>setCategory("farmHouse")}>
-            <FaTreeCity className='w-[30px] h-[30px] text-[black]' /><h3>Farm House</h3>
+            <div className={`w-[200px] h-[120px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg transition-all duration-300 ${category == "farmHouse" ?"border-3 border-[#8b8b8b] shadow-lg" : ""}`} onClick={()=>setCategory("farmHouse")}>
+                <FaTreeCity className='w-[35px] h-[35px] text-[black] mb-2' />
+                <h3 className='font-medium'>Farm House</h3>
             </div>
 
-            <div className={`w-[180px] h-[100px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg ${category == "poolHouse" ?"border-3 border-[#8b8b8b]" : ""}`} onClick={()=>setCategory("poolHouse")}>
-            <MdOutlinePool className='w-[30px] h-[30px] text-[black]' /><h3>Pool House</h3>
+            <div className={`w-[200px] h-[120px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg transition-all duration-300 ${category == "poolHouse" ?"border-3 border-[#8b8b8b] shadow-lg" : ""}`} onClick={()=>setCategory("poolHouse")}>
+                <MdOutlinePool className='w-[35px] h-[35px] text-[black] mb-2' />
+                <h3 className='font-medium'>Pool House</h3>
             </div>
 
-            <div className={`w-[180px] h-[100px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg ${category == "rooms" ?"border-3 border-[#8b8b8b]" : ""}`} onClick={()=>setCategory("rooms")}>
-            <MdBedroomParent className='w-[30px] h-[30px] text-[black]' /><h3>Rooms</h3>
+            <div className={`w-[200px] h-[120px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg transition-all duration-300 ${category == "rooms" ?"border-3 border-[#8b8b8b] shadow-lg" : ""}`} onClick={()=>setCategory("rooms")}>
+                <MdBedroomParent className='w-[35px] h-[35px] text-[black] mb-2' />
+                <h3 className='font-medium'>Rooms</h3>
             </div>
-
-            <div className={`w-[180px] h-[100px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg ${category == "flat" ?"border-3 border-[#8b8b8b]" : ""}`}onClick={()=>setCategory("flat")}>
-            <BiBuildingHouse className='w-[30px] h-[30px] text-[black]' /><h3>Flat</h3>
-            </div>
-
-            <div className={`w-[180px] h-[100px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg ${category == "pg" ?"border-3 border-[#8b8b8b]" : ""}`} onClick={()=>setCategory("pg")}>
-            <IoBedOutline className='w-[30px] h-[30px] text-[black]' /><h3>PG</h3>
-            </div>
-
-            <div className={`w-[180px] h-[100px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg ${category == "cabin" ?"border-3 border-[#8b8b8b]" : ""}`} onClick={()=>setCategory("cabin")}>
-            <GiWoodCabin className='w-[30px] h-[30px] text-[black]' /><h3>Cabin</h3>
-            </div>
-
-            <div className={`w-[180px] h-[100px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg ${category == "shops" ?"border-3 border-[#8b8b8b]" : ""}`} onClick={()=>setCategory("shops")}>
-            <SiHomeassistantcommunitystore className='w-[30px] h-[30px] text-[black]' /><h3>Shops</h3>
-            </div>
-
-            
         </div>
-        <button className='px-[50px] py-[10px] bg-[purple] text-[white] text-[18px] md:px-[100px] rounded-lg absolute right-[5%] bottom-[5%]' onClick={()=>navigate("/listingpage3")} disabled={!category}>Next</button>
+        <button className='px-[50px] py-[10px] bg-[purple] text-[white] text-[18px] md:px-[100px] rounded-lg absolute right-[5%] bottom-[5%] hover:bg-[#6b1b6b] transition-colors duration-300' onClick={()=>navigate("/listingpage3")} disabled={!category}>Next</button>
         </div>
       
     </div>
