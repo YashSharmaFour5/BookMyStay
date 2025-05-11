@@ -158,3 +158,21 @@ export const search = async (req,res) => {
     }
     }
     
+export const randomizeRatings = async (req, res) => {
+    try {
+        const listings = await Listing.find();
+        
+        for (let listing of listings) {
+            // Generate random rating between 3 and 5 with one decimal place
+            const randomRating = (Math.random() * (5 - 3) + 3).toFixed(1);
+            listing.ratings = Number(randomRating);
+            await listing.save();
+        }
+
+        return res.status(200).json({ message: "Ratings randomized successfully" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Error randomizing ratings" });
+    }
+};
+    

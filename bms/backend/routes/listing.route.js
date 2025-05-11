@@ -1,7 +1,7 @@
 import express from "express"
 import isAuth from "../middleware/isAuth.js"
 import upload from "../middleware/multer.js"
-import { addListing, deleteListing, findListing, getListing, ratingListing, search, updateListing } from "../controllers/listing.controller.js"
+import { addListing, deleteListing, findListing, getListing, ratingListing, search, updateListing, randomizeRatings } from "../controllers/listing.controller.js"
 
 let listingRouter = express.Router()
 
@@ -23,5 +23,7 @@ listingRouter.post("/update/:id",isAuth,upload.fields([
     {name:"image2",maxCount:1},
     {name:"image3",maxCount:1}
 ]),updateListing)
+
+listingRouter.post("/randomize-ratings", randomizeRatings)
 
 export default listingRouter
