@@ -3,56 +3,108 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import { GiFamilyHouse } from "react-icons/gi";
 import { MdBedroomParent } from "react-icons/md";
-
 import { MdOutlinePool } from "react-icons/md";
 import { GiWoodCabin } from "react-icons/gi";
 import { SiHomeassistantcommunitystore } from "react-icons/si";
-
 import { IoBedOutline } from "react-icons/io5";
-
 import { FaTreeCity } from "react-icons/fa6";
 import { BiBuildingHouse } from "react-icons/bi";
 import { useContext } from 'react';
 import { listingDataContext } from '../Context/ListingContext';
 
 function ListingPage2() {
-
     let navigate = useNavigate()
-    let {category,setCategory} = useContext(listingDataContext)
-  return (
-    <div className='w-[100%] h-[100vh] bg-white flex items-center justify-center relative overflow-auto '>
-         <div className='w-[50px] h-[50px] bg-[purple] cursor-pointer absolute top-[5%] left-[20px] rounded-[50%] flex items-center justify-center' onClick={()=>navigate("/listingpage1")}><FaArrowLeftLong className='w-[25px] h-[25px] text-[white]' /></div>
-        <div className='w-[200px] h-[50px] text-[20px] bg-[purple] text-[white] flex items-center justify-center rounded-[30px] absolute top-[5%] right-[10px] shadow-lg'> Set Your Category </div>
+    let {category, setCategory} = useContext(listingDataContext)
 
-        <div className='max-w-[900px] w-[100%] h-[550px] overflow-auto bg-white flex items-center justify-start flex-col gap-[40px] mt-[30px] '>
-        <h1 className='text-[18px] text-[black] md:text-[30px] px-[10px] text-center'>Which of these best describes your place?</h1>
-        
-        <div className='max-w-[800px] w-[100%] grid grid-cols-2 md:grid-cols-4 gap-6 px-[20px] place-items-center'>
-            <div className={`w-[200px] h-[120px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg transition-all duration-300 ${category == "villa" ?"border-3 border-[#8b8b8b] shadow-lg" : ""}`} onClick={()=>setCategory("villa")}>
-                <GiFamilyHouse className='w-[35px] h-[35px] text-[black] mb-2' />
-                <h3 className='font-medium'>Villa</h3>
-            </div>
+    const categories = [
+        { id: 'villa', label: 'Villa', icon: GiFamilyHouse, description: 'Luxurious standalone property' },
+        { id: 'farmHouse', label: 'Farm House', icon: FaTreeCity, description: 'Rural retreat with land' },
+        { id: 'poolHouse', label: 'Pool House', icon: MdOutlinePool, description: 'Property with swimming pool' },
+        { id: 'rooms', label: 'Rooms', icon: MdBedroomParent, description: 'Individual rooms for rent' }
+    ]
 
-            <div className={`w-[200px] h-[120px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg transition-all duration-300 ${category == "farmHouse" ?"border-3 border-[#8b8b8b] shadow-lg" : ""}`} onClick={()=>setCategory("farmHouse")}>
-                <FaTreeCity className='w-[35px] h-[35px] text-[black] mb-2' />
-                <h3 className='font-medium'>Farm House</h3>
-            </div>
+    return (
+        <div className='min-h-screen bg-gray-50 flex items-center justify-center relative py-12 px-4'>
+            <div className='max-w-[900px] w-full bg-white rounded-2xl shadow-xl p-6 md:p-8'>
+                {/* Header */}
+                <div className='flex items-center justify-between mb-4'>
+                    <button 
+                        type="button"
+                        onClick={() => navigate("/listingpage1")} 
+                        className='w-10 h-10 bg-purple-600 hover:bg-purple-700 cursor-pointer rounded-full flex items-center justify-center transition-colors shadow-md'
+                    >
+                        <FaArrowLeftLong className='w-5 h-5 text-white' />
+                    </button>
+                    <h1 className='text-xl md:text-2xl font-bold text-purple-600'>Set Your Category</h1>
+                </div>
 
-            <div className={`w-[200px] h-[120px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg transition-all duration-300 ${category == "poolHouse" ?"border-3 border-[#8b8b8b] shadow-lg" : ""}`} onClick={()=>setCategory("poolHouse")}>
-                <MdOutlinePool className='w-[35px] h-[35px] text-[black] mb-2' />
-                <h3 className='font-medium'>Pool House</h3>
-            </div>
+                {/* Progress Indicator */}
+                <div className='w-full h-1.5 bg-gray-200 rounded-full mb-6'>
+                    <div className='w-2/3 h-full bg-purple-600 rounded-full'></div>
+                </div>
 
-            <div className={`w-[200px] h-[120px] flex justify-center items-center flex-col cursor-pointer border-[2px] hover:border-[#a6a5a5] text-[16px] rounded-lg transition-all duration-300 ${category == "rooms" ?"border-3 border-[#8b8b8b] shadow-lg" : ""}`} onClick={()=>setCategory("rooms")}>
-                <MdBedroomParent className='w-[35px] h-[35px] text-[black] mb-2' />
-                <h3 className='font-medium'>Rooms</h3>
+                {/* Main Content */}
+                <div className='space-y-6'>
+                    <h2 className='text-lg md:text-xl text-gray-700 text-center'>
+                        Which of these best describes your place?
+                    </h2>
+
+                    {/* Category Grid */}
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                        {categories.map((cat) => {
+                            const Icon = cat.icon
+                            return (
+                                <div
+                                    key={cat.id}
+                                    onClick={() => setCategory(cat.id)}
+                                    className={`relative p-6 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:shadow-lg group
+                                        ${category === cat.id 
+                                            ? 'border-purple-600 bg-purple-50' 
+                                            : 'border-gray-200 hover:border-purple-300'
+                                        }`}
+                                >
+                                    <div className='flex items-start gap-4'>
+                                        <div className={`p-3 rounded-lg transition-colors
+                                            ${category === cat.id 
+                                                ? 'bg-purple-600 text-white' 
+                                                : 'bg-gray-100 text-gray-600 group-hover:bg-purple-100 group-hover:text-purple-600'
+                                            }`}
+                                        >
+                                            <Icon className='w-6 h-6' />
+                                        </div>
+                                        <div>
+                                            <h3 className='font-semibold text-gray-800'>{cat.label}</h3>
+                                            <p className='text-sm text-gray-500 mt-1'>{cat.description}</p>
+                                        </div>
+                                    </div>
+                                    {category === cat.id && (
+                                        <div className='absolute top-3 right-3 w-5 h-5 bg-purple-600 rounded-full flex items-center justify-center'>
+                                            <div className='w-2 h-2 bg-white rounded-full'></div>
+                                        </div>
+                                    )}
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+
+                {/* Action Button */}
+                <div className='flex items-center justify-end mt-8'>
+                    <button 
+                        onClick={() => navigate("/listingpage3")}
+                        disabled={!category}
+                        className={`px-6 py-2 rounded-lg text-base font-medium transition-all duration-300
+                            ${category 
+                                ? 'bg-purple-600 text-white hover:bg-purple-700 shadow-md hover:shadow-lg' 
+                                : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                            }`}
+                    >
+                        Next Step
+                    </button>
+                </div>
             </div>
         </div>
-        <button className='px-[50px] py-[10px] bg-[purple] text-[white] text-[18px] md:px-[100px] rounded-lg absolute right-[5%] bottom-[5%] hover:bg-[#6b1b6b] transition-colors duration-300' onClick={()=>navigate("/listingpage3")} disabled={!category}>Next</button>
-        </div>
-      
-    </div>
-  )
+    )
 }
 
 export default ListingPage2

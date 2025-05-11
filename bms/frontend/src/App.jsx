@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
+import { Navigate, Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,35 +13,53 @@ import MyListing from './pages/MyListing'
 import ViewCard from './pages/ViewCard'
 import MyBooking from './pages/MyBooking'
 import Booked from './pages/Booked'
+import Footer from './Component/Footer'
 
 
 function App() {
   let {userData} = useContext(userDataContext)
+  const location = useLocation();
+  
+  // List of paths where footer should be hidden
+  const hideFooterPaths = [
+    '/listingpage1',
+    '/listingpage2',
+    '/listingpage3',
+    '/viewcard',
+    '/mylisting',
+    '/mybooking',
+    '/booked'
+  ];
+
+  const shouldShowFooter = !hideFooterPaths.includes(location.pathname);
  
   return (
     <>
     <ToastContainer />
-    <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/login' element={<Login/>}/>
-      <Route path='/signup' element={<SignUp/>}/>
-      <Route path='/listingpage1' 
-      element={userData != null ? <ListingPage1/>:<Navigate to={"/"}/>}/>
-      <Route path='/listingpage2' 
-      element={userData != null ? <ListingPage2/>:<Navigate to={"/"}/>}/>
-      <Route path='/listingpage3'
-       element={userData != null ? <ListingPage3/>:<Navigate to={"/"}/>}/>
-      <Route path='/mylisting'
-       element={userData != null ? <MyListing/>:<Navigate to={"/"}/>}/>
-        <Route path='/viewcard'
-        element={userData != null ? <ViewCard/>:<Navigate to={"/"}/>}/>
-         <Route path='/mybooking'
-       element={userData != null ? <MyBooking/>:<Navigate to={"/"}/>}/>
-       <Route path='/booked'
-       element={userData != null ? <Booked/>:<Navigate to={"/"}/>}/>
-      
-
-    </Routes>
+    <div className="min-h-screen flex flex-col">
+      <div className="flex-grow">
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/signup' element={<SignUp/>}/>
+          <Route path='/listingpage1' 
+          element={userData != null ? <ListingPage1/>:<Navigate to={"/"}/>}/>
+          <Route path='/listingpage2' 
+          element={userData != null ? <ListingPage2/>:<Navigate to={"/"}/>}/>
+          <Route path='/listingpage3'
+           element={userData != null ? <ListingPage3/>:<Navigate to={"/"}/>}/>
+          <Route path='/mylisting'
+           element={userData != null ? <MyListing/>:<Navigate to={"/"}/>}/>
+            <Route path='/viewcard'
+            element={userData != null ? <ViewCard/>:<Navigate to={"/"}/>}/>
+             <Route path='/mybooking'
+           element={userData != null ? <MyBooking/>:<Navigate to={"/"}/>}/>
+           <Route path='/booked'
+           element={userData != null ? <Booked/>:<Navigate to={"/"}/>}/>
+        </Routes>
+      </div>
+      {shouldShowFooter && <Footer />}
+    </div>
     </>
   )
 }

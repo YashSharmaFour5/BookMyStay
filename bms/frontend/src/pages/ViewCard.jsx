@@ -131,191 +131,291 @@ function ViewCard() {
     },[])
     
   return (
-    <div className='w-[100%] h-[100vh] bg-[white] flex items-center justify-center gap-[10px] flex-col overflow-auto  relative'>
-             <div className='w-[50px] h-[50px] bg-[purple] cursor-pointer absolute top-[5%] left-[20px] rounded-[50%] flex items-center justify-center' onClick={()=>navigate("/")}><FaArrowLeftLong className='w-[25px] h-[25px] text-[white]' /></div>
+    <div className='w-[100%] min-h-screen bg-[white] flex items-center justify-start gap-[20px] flex-col overflow-hidden relative pt-[80px] pb-[30px]'>
+             <div className='w-[50px] h-[50px] bg-purple-600 cursor-pointer absolute top-[5%] left-[20px] rounded-[50%] flex items-center justify-center hover:bg-purple-700 transition-colors' onClick={()=>navigate("/")}><FaArrowLeftLong className='w-[25px] h-[25px] text-[white]' /></div>
     
-             <div className='w-[95%]  flex items-start justify-start text-[25px] md:w-[80%] mb-[10px]'>
-                <h1 className='text-[20px]  text-[#272727] md:text-[30px] text-ellipsis text-nowrap overflow-hidden px-[70px] md:px-[0px]'>
-                    {`In ${cardDetails.landMark.toUpperCase()} , ${cardDetails.city.toUpperCase()}`}
+             <div className='w-[95%] md:w-[80%] max-w-[1200px]'>
+                <h1 className='text-[24px] md:text-[32px] font-bold text-gray-800 mb-2'>
+                    {`In ${cardDetails.landMark.toUpperCase()}, ${cardDetails.city.toUpperCase()}`}
                 </h1>
              </div>
     
-             <div className='w-[95%] h-[400px] flex items-center justify-center flex-col md:w-[80%] md:flex-row '>
-                <div className='w-[100%]  h-[65%]  md:w-[70%] md:h-[100%] overflow-hidden flex items-center justify-center border-[2px] border-[white] '>
-                    <img src={cardDetails.image1} alt="" className='w-[100%]' />
+             <div className='w-[95%] md:w-[80%] max-w-[1200px] h-[350px] md:h-[400px] flex flex-col md:flex-row gap-4'>
+                <div className='w-full md:w-[65%] h-[200px] md:h-full rounded-xl overflow-hidden shadow-lg'>
+                    <img src={cardDetails.image1} alt="" className='w-full h-full object-cover hover:scale-105 transition-transform duration-300' />
                 </div>
-                <div className='w-[100%] h-[50%]  flex  items-center justify-center md:w-[50%] md:h-[100%] md:flex-col '>
-                    <div className='w-[100%] h-[100%]  overflow-hidden  flex items-center justify-center border-[2px] '>
-                    <img src={cardDetails.image2} alt="" className='w-[100%]' />
+                <div className='w-full md:w-[35%] h-[140px] md:h-full flex flex-col gap-4'>
+                    <div className='w-full h-1/2 rounded-xl overflow-hidden shadow-lg'>
+                        <img src={cardDetails.image2} alt="" className='w-full h-full object-cover hover:scale-105 transition-transform duration-300' />
                     </div>
-                    <div className='w-[100%] h-[100%]  overflow-hidden  flex items-center justify-center border-[2px] '>
-                    <img src={cardDetails.image3} alt="" className='w-[100%]' />
+                    <div className='w-full h-1/2 rounded-xl overflow-hidden shadow-lg'>
+                        <img src={cardDetails.image3} alt="" className='w-full h-full object-cover hover:scale-105 transition-transform duration-300' />
                     </div>
                 </div>
-               
-             </div>
-             <div className='w-[95%] flex items-start justify-start text-[18px] md:w-[80%] md:text-[25px]'>{`${cardDetails.title.toUpperCase()} ${cardDetails.category.toUpperCase()} , ${cardDetails.landMark.toUpperCase()}`}</div>
-             <div className='w-[95%] flex items-start justify-start text-[18px] md:w-[80%] md:text-[25px] text-gray-800'>{cardDetails.description}</div>
-             <div className='w-[95%] flex items-start justify-start text-[18px] md:w-[80%] md:text-[25px]'>{`Rs.${cardDetails.rent}/day`}</div>
-                 
-             <div className='w-[95%] h-[50px] flex items-center justify-start px-[110px]'>{cardDetails.host == userData._id &&<button className='px-[30px] py-[10px] bg-[purple] text-[white] text-[18px] md:px-[100px] rounded-lg  text-nowrap' onClick={()=>setUpdatePopUp(prev => !prev)}> 
-              Edit listing
-             </button>}
-             {cardDetails.host != userData._id && <button className='px-[30px] py-[10px] bg-[purple] text-[white] text-[18px] md:px-[100px] rounded-lg   text-nowrap' onClick={()=>setBookingPopUp(prev => !prev)}> 
-                Reserve
-             </button>}
              </div>
 
-             {/* Update Listing Page */}
+             <div className='w-[95%] md:w-[80%] max-w-[1200px] flex flex-col gap-4 mt-4'>
+                <div className='flex items-center justify-between'>
+                    <h2 className='text-[24px] md:text-[32px] font-bold text-gray-800'>{cardDetails.title.toUpperCase()}</h2>
+                    <div className='flex items-center gap-2'>
+                        <FaStar className='text-yellow-400 w-5 h-5' />
+                        <span className='text-lg font-semibold'>{cardDetails.ratings}</span>
+                    </div>
+                </div>
 
-            {updatePopUp && <div className='w-[100%] h-[100%] flex items-center justify-center  bg-[#000000c6] absolute top-[0px] z-[100] backdrop-blur-sm'>
-                
-                <RxCross2 className='w-[30px] h-[30px] bg-[purple] cursor-pointer absolute top-[6%] left-[25px] rounded-[50%] flex items-center justify-center' onClick={()=>setUpdatePopUp(false)}/>
-                 
-                  <form action="" className='max-w-[900px] w-[90%] h-[550px] flex items-center justify-start flex-col  gap-[10px] overflow-auto mt-[50px] text-white bg-[#272727] p-[20px] rounded-lg' onSubmit={(e)=>{e.preventDefault()}} 
-                         >
-                             
-                             <div className='w-[200px] h-[50px] text-[20px] bg-[purple] text-[white] flex items-center justify-center rounded-[30px] absolute top-[5%] right-[10px] shadow-lg'>
-                                 Update your details
-                             </div>
-                             <div className='w-[90%] flex items-start justify-start flex-col gap-[10px]'>
-                               <label htmlFor="title" className='text-[20px]'>Title</label>
-                               <input type="text" id='title' className='w-[90%] h-[40px] border-[2px] border-[#555656] rounded-lg text-[18px] px-[20px] text-[black]' required placeholder='_bhk house or best title ' onChange={(e)=>setTitle(e.target.value)} value={title}/>
-                             </div> 
-                 
-                             <div className='w-[90%] flex items-start justify-start flex-col gap-[10px]'>
-                               <label htmlFor="des" className='text-[20px]'>Description</label>
-                               <textarea name="" id="des" className='w-[90%] h-[80px] border-[2px] border-[#555656] rounded-lg text-[18px] px-[20px] text-[black]' required onChange={(e)=>setDescription(e.target.value)} value={description}  ></textarea>
-                             </div> 
-                 
-                             <div className='w-[90%] flex items-start justify-center flex-col gap-[10px]'>
-                               <label htmlFor="img1" className='text-[20px]'>Image1</label>
-                               <div className='flex items-center justify-start  w-[90%] h-[40px] border-[#555656] border-2 rounded-[10px] '><input type="file" id='img1' className='w-[100%] text-[15px] px-[10px] ' required onChange={handleImage1} />
-                               </div>
-                             </div> 
-                 
-                             <div className='w-[90%] flex items-start justify-center flex-col gap-[10px]'>
-                               <label htmlFor="img2" className='text-[20px]'>Image2</label>
-                               <div className='flex items-center justify-start  w-[90%] h-[40px] border-[#555656] border-2 rounded-[10px]'><input type="file" id='img2' className='w-[100%] text-[15px] px-[10px] ' required onChange={handleImage2} />
-                               </div>
-                             </div> 
-                 
-                             <div className='w-[90%] flex items-start justify-center flex-col gap-[10px]'>
-                               <label htmlFor="img3" className='text-[20px]'>Image3</label>
-                               <div className='flex items-center justify-start  w-[90%] h-[40px] border-[#555656] border-2 rounded-[10px]'><input type="file" id='img3' className='w-[100%] text-[15px] px-[10px] ' required onChange={handleImage3}  />
-                               </div>
-                             </div> 
-                 
-                             <div className='w-[90%] flex items-start justify-start flex-col gap-[10px]'>
-                               <label htmlFor="rent" className='text-[20px]'>Rent</label>
-                               <input type="number" id='rent' className='w-[90%] h-[40px] border-[2px] border-[#555656] rounded-lg text-[18px] px-[20px] text-[black]' required placeholder='Rs.______/day' onChange={(e)=>setRent(e.target.value)} value={rent}/>
-                             </div> 
-                 
-                             <div className='w-[90%] flex items-start justify-start flex-col gap-[10px]'>
-                               <label htmlFor="city" className='text-[20px]'>City</label>
-                               <input type="text" id='city' className='w-[90%] h-[40px] border-[2px] border-[#555656] rounded-lg text-[18px] px-[20px] text-[black]' requiredplaceholder='city,country ' onChange={(e)=>setCity(e.target.value)} value={city}/>
-                             </div> 
-                 
-                             <div className='w-[90%] flex items-start justify-start flex-col gap-[10px]'>
-                               <label htmlFor="landmark" className='text-[20px]'>Landmark</label>
-                               <input type="text" id='landmark' className='w-[90%] h-[40px] border-[2px] border-[#555656] rounded-lg text-[18px] px-[20px] text-[black]' required onChange={(e)=>setLandmark(e.target.value)} value={landmark}/>
-                 
-                             </div> 
-                 <div className='w-[100%] flex items-center justify-center gap-[30px] mt-[20px]'>
-                             <button className='px-[10px] py-[10px] bg-[purple] text-[white] text-[15px] md:px-[100px] rounded-lg md:text-[18px] text-nowrap  ' onClick={handleUpdateListing} disabled={updating}>{updating?"updating...":"Update Listing"}</button>
-                             <button className='px-[10px] py-[10px] bg-[purple] text-[white] text-[15px] md:px-[100px] md:text-[18px] rounded-lg  text-nowrap 'onClick={handleDeleteListing} disabled={deleting}>{deleting?"Deleting...":"Delete Listing"}</button>
-                             </div>
-                 
-                 
-                 
-                 
-                         </form>
+                <div className='flex items-center gap-4 text-gray-600'>
+                    <span className='text-base'>{cardDetails.category.toUpperCase()}</span>
+                    <span>•</span>
+                    <span className='text-base'>{cardDetails.landMark.toUpperCase()}</span>
+                </div>
 
+                <div className='text-gray-700 text-base leading-relaxed line-clamp-2'>{cardDetails.description}</div>
 
-                </div>}
-
-                {bookingPopUp && <div className='w-[100%] min-h-[100%] flex items-center justify-center flex-col gap-[30px] bg-[#ffffffcd] absolute top-[0px] z-[100] p-[20px] backdrop-blur-sm md:flex-row md:gap-[100px]'>
-                    <RxCross2 className='w-[30px] h-[30px] bg-[purple] cursor-pointer absolute top-[6%] left-[25px] rounded-[50%] flex items-center justify-center' onClick={()=>setBookingPopUp(false)}/>
-                       
-                        <form className='max-w-[450px] w-[90%] h-[450px] overflow-auto bg-[#f7fbfcfe] p-[20px] rounded-lg flex items-center justify-start flex-col gap-[10px]    border-[1px] border-[#dedddd]' onSubmit={(e)=>{
-                            e.preventDefault()
-                        }}>
-                            <h1 className='w-[100%] flex items-center justify-center py-[10px] text-[25px] border-b-[1px] border-[#a3a3a3]'>Confirm & Book</h1>
-                            <div className='w-[100%] h-[70%] mt-[10px] rounded-lg p-[10px]'>
-                                   <h3 className='text-[19px] font-semibold'> Your Trip -</h3>
-                                   <div className='w-[90%] flex items-center justify-start] gap-[24px] mt-[20px] md:justify-center flex-col md:flex-row md:items-start'>
-                               <label htmlFor="checkin" className='text-[18px] md:text-[20px]'>CheckIn</label>
-                               <input type="date" min={minDate} id='checkIn' className='border-[#555656] border-2 w-[200px] h-[40px] rounded-[10px] bg-transparent px-[10px] text-[15px] md:text-[18px]' required onChange={(e)=>setCheckIn(e.target.value)} value={checkIn}  />
+                <div className='flex items-center gap-2 text-xl font-bold text-purple-600'>
+                    <span>₹{cardDetails.rent}</span>
+                    <span className='text-gray-600 text-base font-normal'>/day</span>
+                </div>
                  
-                             </div> 
-                             <div className='w-[90%] flex items-center justify-start] gap-[10px] mt-[40px] md:justify-center flex-col md:flex-row md:items-start'>
-                               <label htmlFor="checkOut" className='text-[18px] md:text-[20px]'>CheckOut</label>
-                               <input type="date" min={minDate} id='checkOut' className='border-[#555656] border-2 w-[200px] h-[40px] rounded-[10px] bg-transparent px-[10px] text-[15px] md:text-[18px]' required onChange={(e)=>setCheckOut(e.target.value)} value={checkOut}  />
+                <div className='flex items-center gap-4 mt-2'>
+                    {cardDetails.host == userData._id && (
+                        <button 
+                            className='px-6 py-2 bg-purple-600 text-white text-base rounded-lg hover:bg-purple-700 transition-colors shadow-md' 
+                            onClick={()=>setUpdatePopUp(prev => !prev)}
+                        > 
+                            Edit listing
+                        </button>
+                    )}
+                    {cardDetails.host != userData._id && (
+                        <button 
+                            className='px-6 py-2 bg-purple-600 text-white text-base rounded-lg hover:bg-purple-700 transition-colors shadow-md' 
+                            onClick={()=>setBookingPopUp(prev => !prev)}
+                        > 
+                            Reserve
+                        </button>
+                    )}
+                </div>
+             </div>
 
-                 
-                             </div> 
-                             <div className='w-[100%] flex items-center justify-center'>
-                             <button className='px-[80px] py-[10px] bg-[purple] text-[white] text-[18px] md:px-[100px]  rounded-lg  text-nowrap mt-[30px] ' onClick={()=>{handleBooking(cardDetails._id)}} disabled={booking}>{booking?"Booking...":"Book Now"}</button>
-                             </div>
-                                   
+             {/* Update Listing Popup */}
+             {updatePopUp && (
+                <div className='fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-sm z-[100] p-4'>
+                    <div className='relative w-full max-w-[900px] bg-white rounded-xl shadow-2xl p-6 md:p-8'>
+                        <RxCross2 
+                            className='w-8 h-8 bg-purple-600 text-white cursor-pointer absolute top-4 right-4 rounded-full p-1 hover:bg-purple-700 transition-colors' 
+                            onClick={()=>setUpdatePopUp(false)}
+                        />
+                        
+                        <h2 className='text-2xl font-bold text-gray-800 mb-6'>Update Listing Details</h2>
+                        
+                        <form className='space-y-6' onSubmit={(e)=>{e.preventDefault()}}>
+                            <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                                <div className='space-y-2'>
+                                    <label htmlFor="title" className='text-lg font-medium text-gray-700'>Title</label>
+                                    <input 
+                                        type="text" 
+                                        id='title' 
+                                        className='w-full h-12 px-4 border-2 border-gray-300 rounded-lg focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-colors' 
+                                        required 
+                                        placeholder='Enter property title' 
+                                        onChange={(e)=>setTitle(e.target.value)} 
+                                        value={title}
+                                    />
+                                </div>
+
+                                <div className='space-y-2'>
+                                    <label htmlFor="rent" className='text-lg font-medium text-gray-700'>Rent (per day)</label>
+                                    <input 
+                                        type="number" 
+                                        id='rent' 
+                                        className='w-full h-12 px-4 border-2 border-gray-300 rounded-lg focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-colors' 
+                                        required 
+                                        placeholder='Enter rent amount' 
+                                        onChange={(e)=>setRent(e.target.value)} 
+                                        value={rent}
+                                    />
+                                </div>
+
+                                <div className='space-y-2'>
+                                    <label htmlFor="city" className='text-lg font-medium text-gray-700'>City</label>
+                                    <input 
+                                        type="text" 
+                                        id='city' 
+                                        className='w-full h-12 px-4 border-2 border-gray-300 rounded-lg focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-colors' 
+                                        required 
+                                        placeholder='Enter city name' 
+                                        onChange={(e)=>setCity(e.target.value)} 
+                                        value={city}
+                                    />
+                                </div>
+
+                                <div className='space-y-2'>
+                                    <label htmlFor="landmark" className='text-lg font-medium text-gray-700'>Landmark</label>
+                                    <input 
+                                        type="text" 
+                                        id='landmark' 
+                                        className='w-full h-12 px-4 border-2 border-gray-300 rounded-lg focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-colors' 
+                                        required 
+                                        placeholder='Enter landmark' 
+                                        onChange={(e)=>setLandmark(e.target.value)} 
+                                        value={landmark}
+                                    />
+                                </div>
                             </div>
 
+                            <div className='space-y-2'>
+                                <label htmlFor="des" className='text-lg font-medium text-gray-700'>Description</label>
+                                <textarea 
+                                    id="des" 
+                                    className='w-full h-32 px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-colors resize-none' 
+                                    required 
+                                    onChange={(e)=>setDescription(e.target.value)} 
+                                    value={description}
+                                ></textarea>
+                            </div>
 
+                            <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+                                <div className='space-y-2'>
+                                    <label htmlFor="img1" className='text-lg font-medium text-gray-700'>Image 1</label>
+                                    <input 
+                                        type="file" 
+                                        id='img1' 
+                                        className='w-full h-12 px-4 border-2 border-gray-300 rounded-lg focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-colors' 
+                                        onChange={handleImage1} 
+                                    />
+                                </div>
+
+                                <div className='space-y-2'>
+                                    <label htmlFor="img2" className='text-lg font-medium text-gray-700'>Image 2</label>
+                                    <input 
+                                        type="file" 
+                                        id='img2' 
+                                        className='w-full h-12 px-4 border-2 border-gray-300 rounded-lg focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-colors' 
+                                        onChange={handleImage2} 
+                                    />
+                                </div>
+
+                                <div className='space-y-2'>
+                                    <label htmlFor="img3" className='text-lg font-medium text-gray-700'>Image 3</label>
+                                    <input 
+                                        type="file" 
+                                        id='img3' 
+                                        className='w-full h-12 px-4 border-2 border-gray-300 rounded-lg focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-colors' 
+                                        onChange={handleImage3} 
+                                    />
+                                </div>
+                            </div>
+
+                            <div className='flex items-center justify-end gap-4 pt-4'>
+                                <button 
+                                    className='px-6 py-3 bg-red-600 text-white text-lg rounded-lg hover:bg-red-700 transition-colors shadow-md' 
+                                    onClick={handleDeleteListing} 
+                                    disabled={deleting}
+                                >
+                                    {deleting ? "Deleting..." : "Delete Listing"}
+                                </button>
+                                <button 
+                                    className='px-6 py-3 bg-purple-600 text-white text-lg rounded-lg hover:bg-purple-700 transition-colors shadow-md' 
+                                    onClick={handleUpdateListing} 
+                                    disabled={updating}
+                                >
+                                    {updating ? "Updating..." : "Update Listing"}
+                                </button>
+                            </div>
                         </form>
+                    </div>
+                </div>
+             )}
 
-                        <div className='max-w-[450px] w-[90%] h-[450px]  bg-[#f7fbfcfe] p-[20px] rounded-lg flex items-center justify-center flex-col gap-[10px]   border-[1px] border-[#e2e1e1]'>
-                            <div className='w-[95%] h-[30%] border-[1px] border-[#9b9a9a] rounded-lg flex justify-center items-center gap-[8px] p-[20px] overflow-hidden'>
-
-                                <div className='w-[70px] h-[90px] flex items-center justify-center flex-shrink-0 rounded-lg md:w-[100px] md:h-[100px]'><img className='w-[100%] h-[100%] rounded-lg' src={cardDetails.image1} alt="" /></div>
-                                <div className='w-[80%] h-[100px] gap-[5px]'>
-                                <h1 className='w-[90%] truncate'>{`IN ${cardDetails.landMark.toUpperCase()},${cardDetails.city.toUpperCase()} `}</h1>
-                                <h1>{cardDetails.title.toUpperCase()}</h1>
-                                <h1>{cardDetails.category.toUpperCase()}</h1>
-                                <h1 className='flex items-center justify-start gap-[5px]'><FaStar className='text-[#eb6262]' />{cardDetails.ratings}</h1>
-                            </div>
-                                </div>
-                                <div className=' w-[95%] h-[60%] border-[1px] border-[#abaaaa] rounded-lg flex justify-start items-start p-[20px] gap-[15px] flex-col'>
-                                    <h1 className='text-[22px] font-semibold'>Booking Price - </h1>
-                                    <p className='w-[100%] flex justify-between items-center px-[20px]'>
-                                        <span className='font-semibold'>
-                                            {`₹${cardDetails.rent} X ${night} nights`}
-                                        </span>
-                                        <span>{cardDetails.rent*night}</span>
-                
-                                    </p>
-                                    <p className='w-[100%] flex justify-between items-center px-[20px]'>
-                                        <span className='font-semibold'>
-                                            Tax
-                                        </span>
-                                        <span>{cardDetails.rent*7/100}</span>
-                
-                                    </p>
-                                    <p className='w-[100%] flex justify-between items-center px-[20px] border-b-[1px] border-gray-500 pb-[10px]'>
-                                        <span className='font-semibold'>
-                                            BookMyStay Charge
-                                        </span>
-                                        <span>{cardDetails.rent*7/100}</span>
-                
-                                    </p>
-                                    <p className='w-[100%] flex justify-between items-center px-[20px]'>
-                                        <span className='font-semibold'>
-                                            Total Price
-                                        </span>
-                                        <span>{total}</span>
-                
-                                    </p>
- 
-                                </div>
+             {/* Booking Popup */}
+             {bookingPopUp && (
+                <div className='fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-sm z-[100] p-4'>
+                    <div className='relative w-full max-w-[900px] bg-white rounded-xl shadow-2xl p-6 md:p-8'>
+                        <RxCross2 
+                            className='w-8 h-8 bg-purple-600 text-white cursor-pointer absolute top-4 right-4 rounded-full p-1 hover:bg-purple-700 transition-colors' 
+                            onClick={()=>setBookingPopUp(false)}
+                        />
+                        
+                        <div className='flex flex-col md:flex-row gap-8'>
+                            <div className='w-full md:w-1/2'>
+                                <h2 className='text-2xl font-bold text-gray-800 mb-6'>Confirm & Book</h2>
                                 
+                                <form className='space-y-6' onSubmit={(e)=>{e.preventDefault()}}>
+                                    <div className='space-y-4'>
+                                        <h3 className='text-xl font-semibold text-gray-800'>Your Trip</h3>
+                                        
+                                        <div className='space-y-4'>
+                                            <div className='space-y-2'>
+                                                <label htmlFor="checkin" className='text-lg font-medium text-gray-700'>Check-in Date</label>
+                                                <input 
+                                                    type="date" 
+                                                    min={minDate} 
+                                                    id='checkIn' 
+                                                    className='w-full h-12 px-4 border-2 border-gray-300 rounded-lg focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-colors' 
+                                                    required 
+                                                    onChange={(e)=>setCheckIn(e.target.value)} 
+                                                    value={checkIn} 
+                                                />
+                                            </div>
 
+                                            <div className='space-y-2'>
+                                                <label htmlFor="checkout" className='text-lg font-medium text-gray-700'>Check-out Date</label>
+                                                <input 
+                                                    type="date" 
+                                                    min={minDate} 
+                                                    id='checkOut' 
+                                                    className='w-full h-12 px-4 border-2 border-gray-300 rounded-lg focus:border-purple-600 focus:ring-2 focus:ring-purple-200 transition-colors' 
+                                                    required 
+                                                    onChange={(e)=>setCheckOut(e.target.value)} 
+                                                    value={checkOut} 
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div className='w-full md:w-1/2 bg-gray-50 rounded-xl p-6'>
+                                <div className='space-y-4'>
+                                    <h3 className='text-xl font-semibold text-gray-800'>Price Details</h3>
+                                    
+                                    <div className='space-y-2'>
+                                        <div className='flex justify-between text-gray-600'>
+                                            <span>₹{cardDetails.rent} x {night} nights</span>
+                                            <span>₹{cardDetails.rent * night}</span>
+                                        </div>
+                                        
+                                        <div className='flex justify-between text-gray-600'>
+                                            <span>Service fee</span>
+                                            <span>₹{(cardDetails.rent * 0.07).toFixed(2)}</span>
+                                        </div>
+                                        
+                                        <div className='flex justify-between text-gray-600'>
+                                            <span>Tax</span>
+                                            <span>₹{(cardDetails.rent * 0.07).toFixed(2)}</span>
+                                        </div>
+                                        
+                                        <div className='border-t border-gray-300 pt-2 mt-2'>
+                                            <div className='flex justify-between font-semibold text-lg'>
+                                                <span>Total</span>
+                                                <span>₹{total}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button 
+                                        className='w-full py-3 bg-purple-600 text-white text-lg rounded-lg hover:bg-purple-700 transition-colors shadow-md mt-4' 
+                                        onClick={() => handleBooking(cardDetails._id)}
+                                        disabled={booking}
+                                    >
+                                        {booking ? "Processing..." : "Book Now"}
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-
-                    </div>}
-
-             
-          
+                    </div>
+                </div>
+             )}
         </div>
-        
   )
 }
 

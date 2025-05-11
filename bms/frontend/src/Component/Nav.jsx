@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import logo from '../assets/bms.jpg'
+import logo from '../assets/bms.png'
 import { FiSearch } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
@@ -63,21 +63,20 @@ function Nav() {
     },[input])
 
     return (
-
-        <div className='fixed top-0 bg-[white] z-[20]'>
-            <div className='w-[100vw] min-h-[80px]  border-b-[1px] border-[#dcdcdc] px-[20px] flex items-center justify-between md:px-[40px] '>
-                <div><img src={logo} alt="" className='w-[130px]' /></div>
+        <div className='fixed top-0 z-[20] bg-white'>
+            <div className='w-[100vw] min-h-[80px] border-b-[1px] border-gray-200 px-[20px] flex items-center justify-between md:px-[40px]'>
+                <div><img src={logo} alt="" className='w-[160px]' /></div>
 
                 <div className='w-[35%] relative hidden md:block md:ml-[100px]'>
                     <input type="text" className='w-[100%] px-[30px] py-[10px] border-[2px] border-[#bdbaba] outline-none overflow-auto rounded-[30px] text-[17px]' placeholder='Any Where  |  Any Location  |  Any City 'onChange={(e)=>setInput(e.target.value)} value={input}/>
-                    <button className='absolute p-[10px] rounded-[50px] bg-[purple] right-[3%] top-[5px]'><FiSearch className='w-[20px] h-[20px] text-[white]' /></button>
+                    <button className='absolute p-[10px] rounded-[50px] bg-purple-600 right-[3%] top-[5px]'><FiSearch className='w-[20px] h-[20px] text-[white]' /></button>
                 </div>
                 <div className='flex items-center justify-center    gap-[10px] relative'>
-                    <span className='text-[18px] cursor-pointer rounded-[50px] hover:bg-[#ded9d9] px-[8px] py-[5px] hidden md:block' onClick={()=>navigate("/listingpage1")}>List your home</span>
-                    <button className='px-[20px] py-[10px] flex items-center justify-center gap-[5px] border-[1px] border-[#8d8c8c] rounded-[50px] hover:shadow-lg' onClick={()=>setShowpopup(prev =>!prev)}>
-                        <span><GiHamburgerMenu className='w-[20px] h-[20px]' /></span>
-                        {userData == null && <span><CgProfile className='w-[23px] h-[23px]' /></span>}
-                        {userData != null && <span className='w-[30px] h-[30px] bg-[#080808] text-[white] rounded-full flex items-center justify-center'>{userData?.name.slice(0,1)}</span>}
+                    <span className='text-[18px] cursor-pointer rounded-[50px] border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-colors px-[12px] py-[6px] hidden md:block' onClick={()=>navigate("/listingpage1")}>List your home</span>
+                    <button className='px-[20px] py-[10px] flex items-center justify-center gap-[5px] border-2 border-purple-600 rounded-[50px] hover:shadow-lg hover:bg-purple-600 hover:text-white transition-colors' onClick={()=>setShowpopup(prev =>!prev)}>
+                        <span><GiHamburgerMenu className='w-[20px] h-[20px] text-black hover:text-white' /></span>
+                        {userData == null && <span><CgProfile className='w-[23px] h-[23px] border-2 border-purple-600 rounded-full p-[2px] hover:text-white' /></span>}
+                        {userData != null && <span className='w-[30px] h-[30px] bg-purple-600 text-[white] rounded-full flex items-center justify-center'>{userData?.name.slice(0,1)}</span>}
                     </button>
                     {showpopup && <div className='w-[220px] h-[250px] absolute bg-slate-50 top-[110%] right-[3%] border-[1px] border-[#aaa9a9] z-10 rounded-lg md:right-[10%]'>
                         <ul className='w-[100%] h-[100%] text-[17px] flex items-start justify-around flex-col py-[10px]'>
@@ -86,7 +85,7 @@ function Nav() {
                             <div className='w-[100%] h-[1px] bg-[#c1c0c0]'></div>
                             <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer' onClick={()=>{navigate("/listingpage1");setShowpopup(false)}}>List your Home</li>
                             <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'onClick={()=>{navigate("/mylisting");setShowpopup(false)}}>My Listing</li>
-                            <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'  onClick={()=>{navigate("/mybooking");setShowpopup(false)}}>MY Booking</li>
+                            <li className='w-[100%] px-[15px] py-[10px] hover:bg-[#f4f3f3] cursor-pointer'  onClick={()=>{navigate("/mybooking");setShowpopup(false)}}>My Booking</li>
                         </ul>
 
                     </div>}
@@ -111,7 +110,7 @@ function Nav() {
             '>
                 <div className='w-[80%] relative '>
                     <input type="text" className='w-[100%] px-[30px] py-[10px] border-[2px] border-[#bdbaba] outline-none overflow-auto rounded-[30px] text-[17px]' placeholder='Any Where  |  Any Location  |  Any City ' onChange={(e)=>setInput(e.target.value)} value={input} />
-                    <button className='absolute p-[10px] rounded-[50px] bg-[purple] right-[3%] top-[5px]'><FiSearch className='w-[20px] h-[20px] text-[white]' /></button>
+                    <button className='absolute p-[10px] rounded-[50px] bg-purple-600 right-[3%] top-[5px]'><FiSearch className='w-[20px] h-[20px] text-[white]' /></button>
                 </div>
                 </div>
 

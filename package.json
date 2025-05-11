@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tanstack/react-virtual": "^3.13.8",
     "concurrently": "^8.2.2"
   }
-} 
+}
